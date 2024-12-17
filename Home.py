@@ -7,7 +7,7 @@ from io import BytesIO
 st.write("# Welcome to my classroom")
 
 # URL of the image
-image_url = "https://raw.githubusercontent.com/kwonsungja/My-homepy/main/images/%ED%99%88%ED%94%BC%EC%82%AC%EC%A7%84.png"
+image_url = "https://github.com/kwonsungja/KSJ24/blob/main/images/snow.png"
 
 # Load and display the image from the URL
 try:
