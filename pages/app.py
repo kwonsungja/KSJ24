@@ -29,11 +29,11 @@ if "app_state" not in st.session_state:
         "score": 0,
         "trials": 0,
         "feedback": "",
-        "shuffled_nouns": []
+        "shuffled_nouns": [],
     }
 
 # Shuffle noun list once
-if not st.session_state.app_state["shuffled_nouns"]:
+if not st.session_state.app_state.get("shuffled_nouns"):  # Ensure key exists
     all_nouns = df["singular"].unique().tolist()
     random.shuffle(all_nouns)
     st.session_state.app_state["shuffled_nouns"] = all_nouns
@@ -81,5 +81,6 @@ if st.button("Show Report"):
     state = st.session_state.app_state
     st.subheader("Final Report")
     st.write(f"**Your Total Score:** {state['score']} correct out of {state['trials']} attempts.")
+
 
 
