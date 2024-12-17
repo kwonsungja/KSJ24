@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit as st 
 import pandas as pd
 import random
 
@@ -82,7 +82,7 @@ if st.button("Check Answer"):
 # Final Report
 if st.button("Show Report"):
     st.subheader("Final Report")
-    st.write(f"**{st.session_state['user_name']}, Your Total Score:** {st.session_state['score']} correct out of {st.session_state['trials']} attempts.")
+    st.write(f"**{st.session_state['user_name']} Your Total Score:** {st.session_state['score']} correct out of {st.session_state['trials']} attempts.")
 
 
 
