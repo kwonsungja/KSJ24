@@ -77,7 +77,7 @@ if st.button("Check Answer"):
 
     # Display feedback
     st.success(st.session_state["feedback"])
-    st.write(f"### {st.session_state['user_name']}, Your Score: {st.session_state['score']} / {st.session_state['trials']}")
+    st.write(f"### {st.session_state['user_name']} Your Score: {st.session_state['score']} / {st.session_state['trials']}")
 
 # Final Report
 if st.button("Show Report"):
