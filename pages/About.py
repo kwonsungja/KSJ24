@@ -5,8 +5,14 @@ st.header("To be a good English teacher")
 
 # 이미지 추가
 st.subheader("Meet our mascot!")
-image_url = "https://github.com/kwonsungja/KSJ24/blob/main/images/english%20image.png"  # 여기에 캐릭터 이미지 URL 또는 로컬 경로 입력
-st.image(image_url, caption="Your friendly mascot!", width=300)
+
+# 이미지 파일 업로드
+uploaded_file = st.file_uploader("Upload your mascot image (png or jpg)", type=["png", "jpg", "jpeg"])
+
+if uploaded_file is not None:
+    st.image(uploaded_file, caption="Your friendly mascot!", width=300)
+else:
+    st.write("Please upload a mascot image to display.")
 
 st.write("This cute character is here to cheer you on as you learn and grow! 🌟")
 
