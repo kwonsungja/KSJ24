@@ -6,8 +6,8 @@ from io import BytesIO
 # Title
 st.write("# Welcome to my classroom")
 
-# URL of the image
-image_url = "https://github.com/kwonsungja/KSJ24/blob/main/images/snow.png"
+# Correct URL of the image
+image_url = "https://raw.githubusercontent.com/kwonsungja/KSJ24/main/images/snow.png"
 
 # Load and display the image from the URL
 try:
