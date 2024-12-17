@@ -6,6 +6,14 @@ from io import BytesIO
 # Title
 st.write("# Welcome to my classroom")
 
+st.markdown("""
+**"Success is not final, failure is not fatal:  
+It is the courage to continue that counts."**  
+&nbsp;  
+:fire: *Keep pushing forward!* :muscle:  
+:rocket: *The sky is not the limit!* :stars:
+""")
+
 # Correct URL of the image
 image_url = "https://raw.githubusercontent.com/kwonsungja/KSJ24/main/images/snow.png"
 
