@@ -5,15 +5,11 @@ st.header("To be a good English teacher")
 
 # 이미지 추가
 st.subheader("Meet our mascot!")
-
-# 이미지 파일 업로드
-uploaded_file = st.file_uploader("Upload your mascot image (png or jpg)", type=["png", "jpg", "jpeg"])
-
-if uploaded_file is not None:
-    st.image(uploaded_file, caption="Your friendly mascot!", width=300)
-else:
-    st.write("Please upload a mascot image to display.")
+# Raw 이미지 링크 사용
+image_url = "https://raw.githubusercontent.com/kwonsungja/KSJ24/main/images/english%20image.png"
+st.image(image_url, caption="Your friendly mascot!", width=300)
 
 st.write("This cute character is here to cheer you on as you learn and grow! 🌟")
+
 
 
