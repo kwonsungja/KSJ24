@@ -29,21 +29,28 @@ if "app_state" not in st.session_state:
         "score": 0,
         "trials": 0,
         "feedback": "",
+        "shuffled_nouns": []
     }
+
+# Shuffle noun list once
+if not st.session_state.app_state["shuffled_nouns"]:
+    all_nouns = df["singular"].unique().tolist()
+    random.shuffle(all_nouns)
+    st.session_state.app_state["shuffled_nouns"] = all_nouns
 
 # App Layout
 st.title("NounSmart: Practice Regular Plural Nouns")
 st.markdown("""
 ## Instructions:
-1. Select any singular noun from the dropdown list.
+1. Select any singular noun from the shuffled list.
 2. Type its plural form.
 3. Check your answer to see feedback and score.
 """)
 
 # Step 1: Select a Noun
 st.subheader("Step 1: Select a Singular Noun")
-all_nouns = df["singular"].unique()
-selected_noun = st.selectbox("Choose a noun to start:", all_nouns)
+shuffled_nouns = st.session_state.app_state["shuffled_nouns"]
+selected_noun = st.selectbox("Choose a noun to start:", shuffled_nouns)
 
 if selected_noun:
     st.session_state.app_state["current_noun"] = selected_noun
@@ -74,4 +81,5 @@ if st.button("Show Report"):
     state = st.session_state.app_state
     st.subheader("Final Report")
     st.write(f"**Your Total Score:** {state['score']} correct out of {state['trials']} attempts.")
+
 
