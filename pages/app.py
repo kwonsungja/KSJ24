@@ -23,23 +23,28 @@ def pluralize(noun):
     return noun + 's'
 
 # Initialize session state
-if "app_state" not in st.session_state:
-    st.session_state.app_state = {
-        "current_noun": "",
-        "score": 0,
-        "trials": 0,
-        "feedback": "",
-        "shuffled_nouns": [],
-    }
-
-# Shuffle noun list once
-if not st.session_state.app_state.get("shuffled_nouns"):  # Ensure key exists
+if "shuffled_nouns" not in st.session_state:
     all_nouns = df["singular"].unique().tolist()
     random.shuffle(all_nouns)
-    st.session_state.app_state["shuffled_nouns"] = all_nouns
+    st.session_state["shuffled_nouns"] = all_nouns
+    st.session_state["current_noun"] = ""
+    st.session_state["score"] = 0
+    st.session_state["trials"] = 0
+    st.session_state["feedback"] = ""
+    st.session_state["user_name"] = ""  # Add user name to session state
 
 # App Layout
 st.title("NounSmart: Practice Regular Plural Nouns")
+
+# Step 0: User Name Input
+st.subheader("👤 Enter Your Name")
+user_name = st.text_input("Your Name:", value=st.session_state["user_name"], placeholder="Type your name here")
+
+if user_name:
+    st.session_state["user_name"] = user_name
+    st.write(f"### Welcome, **{user_name}**! Let's get started 🎉")
+
+# Instructions
 st.markdown("""
 ## Instructions:
 1. Select any singular noun from the shuffled list.
@@ -49,11 +54,10 @@ st.markdown("""
 
 # Step 1: Select a Noun
 st.subheader("Step 1: Select a Singular Noun")
-shuffled_nouns = st.session_state.app_state["shuffled_nouns"]
-selected_noun = st.selectbox("Choose a noun to start:", shuffled_nouns)
+selected_noun = st.selectbox("Choose a noun to start:", st.session_state["shuffled_nouns"])
 
 if selected_noun:
-    st.session_state.app_state["current_noun"] = selected_noun
+    st.session_state["current_noun"] = selected_noun
     st.write(f"### Singular Noun: **{selected_noun}**")
 
 # Step 2: User Input
@@ -62,25 +66,24 @@ user_input = st.text_input("Enter the plural form:")
 
 # Step 3: Check Answer
 if st.button("Check Answer"):
-    state = st.session_state.app_state
-    correct_plural = pluralize(state["current_noun"])
-    state["trials"] += 1
+    correct_plural = pluralize(st.session_state["current_noun"])
+    st.session_state["trials"] += 1
 
     if user_input.strip().lower() == correct_plural.lower():
-        state["score"] += 1
-        state["feedback"] = f"✅ Correct! The plural form of '{state['current_noun']}' is '{correct_plural}'."
+        st.session_state["score"] += 1
+        st.session_state["feedback"] = f"✅ Correct! The plural form of '{st.session_state['current_noun']}' is '{correct_plural}'."
     else:
-        state["feedback"] = f"❌ Incorrect. The correct plural form of '{state['current_noun']}' is '{correct_plural}'."
+        st.session_state["feedback"] = f"❌ Incorrect. The correct plural form of '{st.session_state['current_noun']}' is '{correct_plural}'."
 
     # Display feedback
-    st.success(state["feedback"])
-    st.write(f"### Your Score: {state['score']} / {state['trials']}")
+    st.success(st.session_state["feedback"])
+    st.write(f"### {st.session_state['user_name']}, Your Score: {st.session_state['score']} / {st.session_state['trials']}")
 
 # Final Report
 if st.button("Show Report"):
-    state = st.session_state.app_state
     st.subheader("Final Report")
-    st.write(f"**Your Total Score:** {state['score']} correct out of {state['trials']} attempts.")
+    st.write(f"**{st.session_state['user_name']}, Your Total Score:** {st.session_state['score']} correct out of {st.session_state['trials']} attempts.")
+
 
 
 
